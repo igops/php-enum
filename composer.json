@@ -1,0 +1,16 @@
+{
+    "name": "kugaudo/php-enum",
+    "description": "Tiny Java-styled enumeration support for PHP",
+    "authors": [
+        {
+            "name": "Igor Kugaudo",
+            "email": "igor@kugaudo.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Kugaudo\\PhpEnum\\": ["src/"]
+        }
+    }
+}
