@@ -1,6 +1,6 @@
 # php-enum
 Tiny Java-styled enumeration support for PHP based on traits.  
-Supports identifier-driven enums and class extensions.
+Supports identifier-driven enums and class extensions (see src/Samples).
 
 The minimalistic sample of enumeration class looks like:
 ```php
@@ -38,6 +38,7 @@ final class GenderMinimal
     {
         return self::values()['MALE'];
     }
+
     /**
      * @return self
      */
@@ -159,7 +160,7 @@ class UsageSample
      */
     private static function polymorphicGreeting(GenderPolymorphicInterface $gender)
     {
-        if ($gender->getTitle() === 'MALE' || $gender->getTitle() === 'FEMALE') {
+        if (in_array($gender->getTitle(), ['Male', 'Female'])) {
             return 'Hello!';
         } else {
             return 'Welcome to Earth!';

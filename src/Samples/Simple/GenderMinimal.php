@@ -43,6 +43,7 @@ final class GenderMinimal
     {
         return self::values()['MALE'];
     }
+
     /**
      * @return self
      */

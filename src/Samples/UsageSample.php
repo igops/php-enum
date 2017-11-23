@@ -113,7 +113,7 @@ class UsageSample
      */
     private static function polymorphicGreeting(GenderPolymorphicInterface $gender)
     {
-        if ($gender->getTitle() === 'MALE' || $gender->getTitle() === 'FEMALE') {
+        if (in_array($gender->getTitle(), ['Male', 'Female'])) {
             return 'Hello!';
         } else {
             return 'Welcome to Earth!';
