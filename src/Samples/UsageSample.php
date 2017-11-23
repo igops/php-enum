@@ -14,23 +14,23 @@ use Kugaudo\PhpEnum\Samples\Simple\GenderWithPrimaryKey;
 
 class UsageSample
 {
-    public function minimalSample()
+    public function minimalisticSample()
     {
         // creating pointers
         $male = GenderMinimal::MALE();
         $female = GenderMinimal::FEMALE();
 
         // passing as method argument
-        self::writeln(self::greeting($male));
-        self::writeln(self::greeting($female));
+        self::assert(self::greeting($male) === 'Mr.');
+        self::assert(self::greeting($female) === 'Ms./Mrs.');
 
         // comparing pointers
-        self::writeln($male === $female ? 'true' : 'false');
-        self::writeln($female === GenderMinimal::FEMALE() ? 'true' : 'false');
+        self::assert($male !== $female);
+        self::assert($female === GenderMinimal::FEMALE());
 
         // iterating over the values with type hinting
         foreach (GenderMinimal::values() as $value) {
-            self::writeln($value->getTitle());
+            self::assert(in_array($value->getTitle(), ['Male', 'Female']));
         }
 
         return $this;
@@ -45,14 +45,14 @@ class UsageSample
             return GenderWithPrimaryKey::find($ref);
         }
         $gender = dummyFetch();
-        self::writeln(sprintf('Fetched gender [title=%s]', $gender->getTitle()));
+        self::assert($gender->getTitle() === 'Male');
 
         // imitating persisting in storage
         function dummyPersist(GenderWithPrimaryKey $gender) {
             return $gender->getPk();
         }
         $persistedRef = dummyPersist(GenderWithPrimaryKey::MALE());
-        self::writeln(sprintf('Persisted reference [id=%d]', $persistedRef));
+        self::assert($persistedRef === 1);
 
         return $this;
     }
@@ -64,9 +64,8 @@ class UsageSample
         $female = GenderWithHelpers::findByShortCode('f');
 
         // calling helper methods
-        if ($male->isMale() && $female->isFemale()) {
-            self::writeln(implode(', ', [$male, $female]));
-        }
+        self::assert($male->isMale());
+        self::assert($female->isFemale());
 
         return $this;
     }
@@ -74,24 +73,20 @@ class UsageSample
     public function polymorphicSample()
     {
         // the pointer of extended class is not strictly equal to base class pointer
-        if (GenderPolymorphicBase::MALE() === GenderPolymorphicBaseExt::MALE() ||
-            GenderPolymorphicBase::FEMALE() === GenderPolymorphicBaseExt::FEMALE()) {
-            throw new \LogicException('Polymorphism went wrong');
-        }
-        // but they do hold equal data
-        if (GenderPolymorphicBase::MALE()->getTitle() !== GenderPolymorphicBaseExt::MALE()->getTitle() ||
-            GenderPolymorphicBase::FEMALE()->getTitle() !== GenderPolymorphicBaseExt::FEMALE()->getTitle()) {
-            throw new \LogicException('Polymorphism went wrong');
-        }
-        self::writeln('Polymorphic pointers are brilliant');
+        self::assert(GenderPolymorphicBase::MALE() !== GenderPolymorphicBaseExt::MALE());
+        self::assert(GenderPolymorphicBase::FEMALE() !== GenderPolymorphicBaseExt::FEMALE());
+
+        /// but they do hold equal data
+        self::assert(GenderPolymorphicBase::MALE()->getTitle() === GenderPolymorphicBaseExt::MALE()->getTitle());
+        self::assert(GenderPolymorphicBase::FEMALE()->getTitle() === GenderPolymorphicBaseExt::FEMALE()->getTitle());
 
         // calling base methods from child class
         foreach (GenderPolymorphicBaseExt::getHumans() as $human) {
-            self::writeln($human->getTitle());
+            self::assert(in_array($human->getTitle(), ['Male', 'Female']));
         }
 
         // passing as method argument
-        self::writeln(self::polymorphicGreeting(GenderPolymorphicImpl::ALIEN()));
+        self::assert(self::polymorphicGreeting(GenderPolymorphicImpl::ALIEN()) === 'Welcome to Earth!');
 
         return $this;
     }
@@ -126,10 +121,12 @@ class UsageSample
     }
 
     /**
-     * @param string $message
+     * @param bool $assertion
      */
-    private static function writeln(string $message)
+    private static function assert(bool $assertion)
     {
-        echo $message . PHP_EOL;
+        if (!$assertion) {
+            throw new \LogicException('Something went wrong');
+        }
     }
 }
