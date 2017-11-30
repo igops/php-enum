@@ -38,8 +38,11 @@ class UsageSample
 
     public function primaryKeySample()
     {
-        // imitating reading from storage
-        function dummyFetch(): GenderWithPrimaryKey {
+        /**
+         * Imitates reading from storage
+         * @return GenderWithPrimaryKey
+         */
+        function dummyFetch() {
             // dummy calculation of referenced id
             $ref = (1 + 1) / 2;
             return GenderWithPrimaryKey::find($ref);
@@ -47,7 +50,11 @@ class UsageSample
         $gender = dummyFetch();
         self::assert($gender->getTitle() === 'Male');
 
-        // imitating persisting in storage
+        /**
+         * Imitates persisting to storage
+         * @param GenderWithPrimaryKey $gender
+         * @return int
+         */
         function dummyPersist(GenderWithPrimaryKey $gender) {
             return $gender->getPk();
         }
@@ -123,7 +130,7 @@ class UsageSample
     /**
      * @param bool $assertion
      */
-    private static function assert(bool $assertion)
+    private static function assert($assertion)
     {
         if (!$assertion) {
             throw new \LogicException('Something went wrong');

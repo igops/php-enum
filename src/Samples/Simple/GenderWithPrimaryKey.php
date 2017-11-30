@@ -57,7 +57,7 @@ final class GenderWithPrimaryKey
     /**
      * @return int
      */
-    public function getPk(): int
+    public function getPk()
     {
         return $this->pk;
     }
@@ -65,7 +65,7 @@ final class GenderWithPrimaryKey
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->title;
     }

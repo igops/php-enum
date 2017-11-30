@@ -61,16 +61,20 @@ final class GenderWithHelpers
      * @param string $title
      * @return null|self
      */
-    public static function findByTitle(string $title)
+    public static function findByTitle($title)
     {
-        return self::values()[strtoupper($title)] ?? null;
+        $title2upper = strtoupper($title);
+        if (array_key_exists($title2upper, self::values())) {
+            return self::values()[$title2upper];
+        }
+        return null;
     }
 
     /**
      * @param string $code
      * @return null|self
      */
-    public static function findByShortCode(string $code)
+    public static function findByShortCode($code)
     {
         $code2upper = strtoupper($code);
         return self::findOneBy(function($item) use ($code2upper) {
@@ -105,7 +109,7 @@ final class GenderWithHelpers
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->title;
     }

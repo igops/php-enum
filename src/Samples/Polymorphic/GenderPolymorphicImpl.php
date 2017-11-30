@@ -65,7 +65,7 @@ class GenderPolymorphicImpl implements GenderPolymorphicInterface
      * Overridden method
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->title;
     }

@@ -55,7 +55,7 @@ final class GenderMinimal
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->title;
     }
