@@ -12,7 +12,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Kugaudo\\PhpEnum\\": ["src/"]
+            "Kugaudo\\PhpEnum\\": ["src/"],
+            "Kugaudo\\PhpEnum\\Samples\\": ["samples/"]
         }
     }
 }

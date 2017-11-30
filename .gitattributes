@@ -1,0 +1,5 @@
+/samples export-ignore
+/readme.md export-ignore
+/.idea export-ignore
+
+/.gitattributes export-ignore

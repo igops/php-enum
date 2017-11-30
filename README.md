@@ -1,6 +1,6 @@
 # php-enum
 Tiny Java-styled enumeration support for PHP based on traits.  
-Supports identifier-driven enums and class extensions (see src/Samples).
+Supports identifier-driven enums and class extensions (see [/samples](samples)).
 
 The minimalistic sample of enumeration class looks like:
 ```php

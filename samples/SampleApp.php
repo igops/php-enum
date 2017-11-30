@@ -1,10 +1,8 @@
 <?php
 
 
-namespace Kugaudo\PhpEnum;
+namespace Kugaudo\PhpEnum\Samples;
 
-
-use Kugaudo\PhpEnum\Samples\UsageSample;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -14,3 +12,5 @@ require_once __DIR__.'/../vendor/autoload.php';
     ->helperMethodsSample()
     ->polymorphicSample()
 ;
+
+die('Execution of UsageSample completed without exceptions');
