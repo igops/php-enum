@@ -2,6 +2,11 @@
 Tiny Java-styled enumeration support for PHP based on traits.  
 Supports identifier-driven enums and class extensions (see [/samples](samples)).
 
+Installation with composer:
+```bash
+composer require kugaudo/php-enum
+```
+
 The minimalistic sample of enumeration class looks like:
 ```php
 final class GenderMinimal
